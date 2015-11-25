@@ -1,5 +1,8 @@
-package seia.fastclasscreator;
+package seia.fastclasscreator.v1;
 
+/**
+ * @author Krzysztof "SeiA" Dobrzyñski
+ */
 public class KeyWords
 {
 	public static final String _package = "package";
