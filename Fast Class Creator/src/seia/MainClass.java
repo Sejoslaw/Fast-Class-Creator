@@ -1,4 +1,4 @@
-package seia.fastclasscreator;
+package seia;
 
 /**
  * Just for testing.
