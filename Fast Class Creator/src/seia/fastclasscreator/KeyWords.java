@@ -1,6 +1,6 @@
 package seia.fastclasscreator;
 
-public class KeyWord 
+public class KeyWords
 {
 	public static final String _package = "package";
 	public static final String _class = "class";
@@ -40,11 +40,7 @@ public class KeyWord
 	public static final String _long = "long";
 	public static final String _short = "short";
 	public static final String _void = "void";
-	
-	public static final String _array = "[]";
-	public static final String TAB = "	";
-	public static final String ENTER = "\n";
-	
+
 	public static final String _assert = "assert";
 	public static final String _break = "break";
 	public static final String _case = "case";
@@ -62,6 +58,14 @@ public class KeyWord
 	public static final String _throws = "throws";
 	public static final String _try = "try";
 	public static final String _while = "while";
+	
+	public static final String _array = "[]";
+	public static final String TAB = "	";
+	public static final String ENTER = "\n";
+	
+	public static final String FUNCTION_START = "{";
+	public static final String FUNCTION_END = "}";
+	public static final String END_LINE = ";";
 	
 	public static String asArray(String s)
 	{
