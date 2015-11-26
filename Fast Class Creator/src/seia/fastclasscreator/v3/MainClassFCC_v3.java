@@ -39,6 +39,9 @@ public class MainClassFCC_v3
 				new String[]{"return x + x2;"});
 		ComponentCreator.addMethod(new String[]{"public"}, "int", "getX", new String[]{}, 
 				new String[]{"return x;"});
+		{
+			ComponentCreator.createMainComponent(new String[]{}, "class");
+		}
 		ComponentCreator.constructFile();
 	}
 }

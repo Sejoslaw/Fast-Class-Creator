@@ -79,6 +79,11 @@ public class ComponentCreator
 		return imp;
 	}
 
+	/**
+	 * This method is used only for the Main Class name and class access.
+	 * @param access
+	 * @param type
+	 */
 	public static void createMainComponent(String[] access, String type) 
 	{
 		_mainComponentAccess = access;
