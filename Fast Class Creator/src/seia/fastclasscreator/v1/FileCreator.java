@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 
-import seia.fastclasscreator.v2.utils.ImportsHandler;
-
 /**
  * ObjectClass is used to create final class look.
  * Here are added packages, class itself, etc.
@@ -19,12 +17,12 @@ public class FileCreator
 	/** class, interface, enum, etc. */
 	public String componentType;
 	public String componentName;
-	public ImportsHandler importsHandler;
+	public ImportHandler importsHandler;
 	public List<String> classBody;
 	public ComponentBodyCreator cbc;
 	
 	public FileCreator(String _package, String[] componentAccess, String componentType, String componentName, 
-			List<String> list, ImportsHandler ih, ComponentBodyCreator cbc) 
+			List<String> list, ImportHandler ih, ComponentBodyCreator cbc) 
 	{
 		this._package = _package;
 		this.componentAccess = componentAccess;
@@ -47,6 +45,7 @@ public class FileCreator
 		File file = new File(whereToAdd + componentName + ".java");
 		try 
 		{
+			file.createNewFile();
 			PrintWriter pw = new PrintWriter(file);
 			pw.println(_package);
 			pw.println();

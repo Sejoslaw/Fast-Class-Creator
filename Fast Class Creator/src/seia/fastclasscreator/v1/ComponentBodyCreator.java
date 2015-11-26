@@ -2,9 +2,6 @@ package seia.fastclasscreator.v1;
 
 import java.util.List;
 
-import seia.fastclasscreator.v2.utils.ImportsHandler;
-import seia.fastclasscreator.v2.utils.KeyWords;
-
 /**
  * Always remember to "addToList". <br>
  * Nothing will be added automatically. <br>
@@ -46,6 +43,16 @@ public class ComponentBodyCreator
 		return type + " " + variableName + " = " + value + KeyWords.END_LINE;
 	}
 	
+	public String declareNewVariable(String[] access, String type, String variableName, String value)
+	{
+		String variable = "";
+		for(int i = 0; i < access.length - 1; i++)
+			variable += access[i] + ", ";
+		if(access.length > 0)
+			variable += access[access.length - 1] + " ";
+		return variable + declareNewVariable(type, variableName, value);
+	}
+	
 	/**
 	 * 
 	 * @param type
@@ -56,6 +63,16 @@ public class ComponentBodyCreator
 	public String declareNewObject(String type, String variableName, String[] params)
 	{
 		return declareNewVariable(type, variableName, createNewObject(type, params));
+	}
+	
+	public String declareNewObject(String[] access, String type, String variableName, String[] params)
+	{
+		String _object = "";
+		for(int i = 0; i < access.length - 1; i++)
+			_object += access[i] + ", ";
+		if(access.length > 0)
+			_object += access[access.length - 1] + " ";
+		return _object + declareNewObject(type, variableName, params);
 	}
 	
 	/**
@@ -69,7 +86,8 @@ public class ComponentBodyCreator
 		String value = "new " + type + "(";
 		for(int i = 0; i < params.length - 1; i++)
 			value += params[i] + ", ";
-		value += params[params.length - 1];
+		if(params.length > 0)
+			value += params[params.length - 1];
 		value += ")";
 		return value;
 	}
@@ -120,7 +138,8 @@ public class ComponentBodyCreator
 	 * @param methodBody
 	 * @return
 	 */
-	public String buildMethod(String[] methodAccess, String returnType, String methodName, String[] methodArgs, String[] methodBody)
+	public String buildMethod(String[] methodAccess, String returnType, String methodName, String[] methodArgs, 
+			String[] methodBody)
 	{
 		String method = "";
 		for(int i = 0; i < methodAccess.length; i++)
@@ -129,7 +148,8 @@ public class ComponentBodyCreator
 		method += methodName + "(";
 		for(int i = 0; i < methodArgs.length - 1; i++)
 			method += methodArgs[i] + ", ";
-		method += methodArgs[methodArgs.length - 1];
+		if(methodArgs.length > 0)
+			method += methodArgs[methodArgs.length - 1];
 		method += ")";
 		method += KeyWords.FUNCTION_START;
 		for(int i = 0; i < methodBody.length; i++)
@@ -145,7 +165,8 @@ public class ComponentBodyCreator
 		constructor += KeyWords.TAB + type + " " + constructorName + "( ";
 		for(int i = 0; i < constructorArgs.length - 1; i++)
 			constructor += constructorArgs[i] + ", ";
-		constructor += constructorArgs[constructorArgs.length - 1];
+		if(constructorArgs.length > 0)
+			constructor += constructorArgs[constructorArgs.length - 1];
 		constructor += ") ";
 		constructor += KeyWords.FUNCTION_START;
 		for(int i = 0; i < constructorBody.length; i++)
@@ -165,10 +186,10 @@ public class ComponentBodyCreator
 	 */
 	public FileCreator createJavaFile(String _package, String[] componentAccess, String componentType, String componentName, List<String> imports)
 	{
-		return new FileCreator(_package, componentAccess, componentType, componentName, fileLines, new ImportsHandler(imports), this);
+		return new FileCreator(_package, componentAccess, componentType, componentName, fileLines, new ImportHandler(imports), this);
 	}
 	
-	public FileCreator createJavaFile(String _package, String[] componentAccess, String componentType, String componentName, ImportsHandler ih)
+	public FileCreator createJavaFile(String _package, String[] componentAccess, String componentType, String componentName, ImportHandler ih)
 	{
 		return createJavaFile(_package, componentAccess, componentType, componentName, ih.importsList);
 	}

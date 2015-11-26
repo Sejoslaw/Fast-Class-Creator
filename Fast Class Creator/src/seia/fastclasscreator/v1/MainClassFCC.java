@@ -2,8 +2,6 @@ package seia.fastclasscreator.v1;
 
 import java.util.ArrayList;
 
-import seia.fastclasscreator.v2.utils.KeyWords;
-
 /**
  * Just for testing.
  * @author Krzysztof "SeiA" Dobrzyñski
@@ -11,6 +9,7 @@ import seia.fastclasscreator.v2.utils.KeyWords;
 public class MainClassFCC 
 {
 	public static ComponentBodyCreator cc = new ComponentBodyCreator(new ArrayList<String>());
+	public static String PATH = "C:\\";
 	
 	public static void main(String[] args)
 	{

@@ -1,12 +1,12 @@
-package seia.fastclasscreator.v2.utils;
+package seia.fastclasscreator.v1;
 
 import java.util.List;
 
-public class ImportsHandler 
+public class ImportHandler 
 {
 	public List<String> importsList;
 	
-	public ImportsHandler(List<String> imports)
+	public ImportHandler(List<String> imports)
 	{
 		this.importsList = imports;
 	}
