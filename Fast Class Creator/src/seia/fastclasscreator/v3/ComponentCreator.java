@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 
-import seia.fastclasscreator.v1.KeyWords;
-
 public class ComponentCreator 
 {
 	private static String _fileName;
@@ -60,6 +58,7 @@ public class ComponentCreator
 	{
 		clearInfo();
 		_file = new File(path + "\\" + nazwaPliku + "." + fileType);
+		_fileName = nazwaPliku;
 	}
 	
 	public static void setImportsAs(List<String> arrayList) 
@@ -91,11 +90,11 @@ public class ComponentCreator
 		_fileBody = arrayList;
 	}
 
-	public static String createConstructor(String accessibility, String[] constructorArgs,
+	public static String addConstructor(String accessibility, String[] constructorArgs,
 			String[] constructorBody) 
 	{
 		String constructor = "";
-		constructor += KeyWords.TAB + accessibility + " " + _fileName + "( ";
+		constructor += accessibility + " " + _fileName + "( ";
 		for(int i = 0; i < constructorArgs.length - 1; i++)
 			constructor += constructorArgs[i] + ", ";
 		if(constructorArgs.length > 0)
@@ -109,8 +108,8 @@ public class ComponentCreator
 		return constructor;
 	}
 
-	public static String addMethod(String[] methodAccess, String returnType, String methodName, String[] methodArgs, 
-			String[] methodBody) 
+	public static String addMethod(String[] methodAccess, String returnType, String methodName, 
+			String[] methodArgs, String[] methodBody) 
 	{
 		String method = "";
 		for(int i = 0; i < methodAccess.length; i++)
@@ -207,6 +206,11 @@ public class ComponentCreator
 		return type + " " + variableName + " = " + value + KeyWords.END_LINE;
 	}
 	
+	public static String declareNewVariableWithoutInitialization(String type, String variableName)
+	{
+		return type + " " + variableName + ";";
+	}
+	
 	public static String declareNewVariable(String[] access, String type, String variableName, String value)
 	{
 		String variable = "";
@@ -215,6 +219,16 @@ public class ComponentCreator
 		if(access.length > 0)
 			variable += access[access.length - 1] + " ";
 		return variable + declareNewVariable(type, variableName, value);
+	}
+	
+	public static String declareNewVariableWithoutInitialization(String[] access, String type, String variableName)
+	{
+		String variable = "";
+		for(int i = 0; i < access.length - 1; i++)
+			variable += access[i] + ", ";
+		if(access.length > 0)
+			variable += access[access.length - 1] + " ";
+		return variable + declareNewVariableWithoutInitialization(type, variableName);
 	}
 	
 	/**
@@ -263,7 +277,7 @@ public class ComponentCreator
 	 * @param functionBody
 	 * @return
 	 */
-	public static String buildFunction(String functionType, String condition, String functionBody)
+	public static String addFunction(String functionType, String condition, String functionBody)
 	{
 		String function = 
 				KeyWords.TAB + functionType + "( " + condition + " )" +
@@ -273,7 +287,7 @@ public class ComponentCreator
 		return function;
 	}
 	
-	public static String buildFunction_IfElse(String condition, String functionBodyIf, String functionBodyElse)
+	public static String addFunction_IfElse(String condition, String functionBodyIf, String functionBodyElse)
 	{
 		String function = 
 				KeyWords.TAB + KeyWords._if + "( " + condition + " )" +
@@ -287,7 +301,7 @@ public class ComponentCreator
 		return function;
 	}
 	
-	public static String buildFunction_IfElse_ShortVersion(String condition, String functionBodyIf, 
+	public static String addFunction_IfElse_ShortVersion(String condition, String functionBodyIf, 
 			String functionBodyElse)
 	{
 		String function = "(( " + condition + " ) ? ( " + functionBodyIf + " ) : ( " + functionBodyElse + " )) ";
