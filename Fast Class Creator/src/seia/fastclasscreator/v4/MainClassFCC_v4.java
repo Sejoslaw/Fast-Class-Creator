@@ -9,7 +9,7 @@ import seia.fastclasscreator.v4.component.IComponent;
  * Just for testing.
  * @author Krzysztof "SeiA" Dobrzyñski
  */
-public class MainClassFCC_v3 
+public class MainClassFCC_v4 
 {
 	public static String PATH = "C:\\Users\\Krzysztof\\Desktop";
 	
