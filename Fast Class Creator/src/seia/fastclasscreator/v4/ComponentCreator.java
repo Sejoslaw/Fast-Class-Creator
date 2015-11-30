@@ -4,12 +4,20 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 
-import seia.fastclasscreator.v4.component.IComponent;
+import seia.fastclasscreator.v4.api.IComponent;
+import seia.fastclasscreator.v4.api.IComponentCreator;
+import seia.fastclasscreator.v4.api.IFile;
+import seia.fastclasscreator.v4.api.IFileHandler;
+import seia.fastclasscreator.v4.file.CreatedFile;
 
-public class ComponentCreator 
+/**
+ * Dorobiæ FileHandler i zapamietac utworzone pliki.
+ * @author Krzysztof "SeiA" Dobrzyñski
+ */
+public class ComponentCreator implements IComponentCreator
 {
 	private static String _fileName;
-	private static String whatExtends;
+	private static String _whatExtends;
 	private static String _package;
 	private static File _file;
 	private static List<String> _imports;
@@ -17,6 +25,7 @@ public class ComponentCreator
 	private static String[] _mainComponentAccess;
 	private static String _mainComponentType;
 	private static List<IComponent> _additionalComponents;
+	private static IFileHandler _fileHandler;
 	
 	public static String getCurrentFileName()
 	{
@@ -25,7 +34,7 @@ public class ComponentCreator
 	
 	public static String getCurrentExtends()
 	{
-		return whatExtends;
+		return _whatExtends;
 	}
 	
 	public static String getCurrentPackage()
@@ -61,6 +70,21 @@ public class ComponentCreator
 	public static List<IComponent> getAdditionalComponents()
 	{
 		return _additionalComponents;
+	}
+	
+	public IFileHandler getFileHandler()
+	{
+		return _fileHandler;
+	}
+	
+	public static void setFileHandler(IFileHandler fileHandler)
+	{
+		_fileHandler = fileHandler;
+	}
+	
+	public static void addToFileHandler(IFile file)
+	{
+		_fileHandler.addFile(file);
 	}
 	
 	public static void initializeNewJavaFile(String path, String nazwaPliku) 
@@ -180,8 +204,8 @@ public class ComponentCreator
 				s += _implements[i] + ", ";
 			s += _implements[_implements.length - 1];
 		}
-		whatExtends = s;
-		return whatExtends;
+		_whatExtends = s;
+		return _whatExtends;
 	}
 
 	/**
@@ -201,7 +225,7 @@ public class ComponentCreator
 			for(int i = 0; i < _mainComponentAccess.length; i++)
 				pw.print(_mainComponentAccess[i] + " ");
 			pw.print(_mainComponentType + " ");
-			pw.print(_fileName + whatExtends);
+			pw.print(_fileName + _whatExtends);
 			pw.println();
 			pw.println("{");
 			for(int i = 0; i < _fileBody.size(); i++)
@@ -214,12 +238,16 @@ public class ComponentCreator
 			}
 			pw.println("}");
 			pw.close();
-			clearInfo();
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
+		_fileHandler.addFile(new CreatedFile(
+				_fileName, _whatExtends, _package, _file, _imports, _fileBody, 
+				_mainComponentAccess, _mainComponentType, _additionalComponents
+				));
+		clearInfo();
 	}
 	
 	public static void clearInfo()
@@ -231,7 +259,7 @@ public class ComponentCreator
 		_package = "";
 		_mainComponentAccess = null;
 		_mainComponentType = "";
-		whatExtends = "";
+		_whatExtends = "";
 	}
 	
 	

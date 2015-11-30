@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seia.fastclasscreator.v4.KeyWords;
+import seia.fastclasscreator.v4.api.IComponent;
 
 public class Component implements IComponent 
 {

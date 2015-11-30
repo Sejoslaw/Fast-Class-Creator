@@ -1,4 +1,4 @@
-package seia.fastclasscreator.v4.component;
+package seia.fastclasscreator.v4.api;
 
 import java.util.List;
 

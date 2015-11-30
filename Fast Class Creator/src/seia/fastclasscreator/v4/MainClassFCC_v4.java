@@ -2,8 +2,10 @@ package seia.fastclasscreator.v4;
 
 import java.util.ArrayList;
 
+import seia.fastclasscreator.v4.api.IComponent;
+import seia.fastclasscreator.v4.api.IFile;
 import seia.fastclasscreator.v4.component.Component;
-import seia.fastclasscreator.v4.component.IComponent;
+import seia.fastclasscreator.v4.file.FileHandler;
 
 /**
  * Just for testing.
@@ -11,16 +13,19 @@ import seia.fastclasscreator.v4.component.IComponent;
  */
 public class MainClassFCC_v4 
 {
-	public static String PATH = "C:\\Users\\Krzysztof\\Desktop";
+	//public static String PATH = "C:\\Users\\Krzysztof\\Desktop";
+	public static String PATH = "C:\\Users\\Krzysztof\\git\\FastClassCreator\\" +
+						 	    "Fast Class Creator\\src\\seia\\fastclasscreator\\v4\\test";
 	
 	public static void main(String[] args)
 	{
-		ComponentCreator.initializeNewJavaFile(PATH, "NazwaPliku");
-		ComponentCreator.setPackage("seia.fastclasscreator.v3");
+		ComponentCreator.initializeNewJavaFile(PATH, "Test");
+		ComponentCreator.setFileHandler(new FileHandler(new ArrayList<IFile>()));
+		ComponentCreator.setPackage("seia.fastclasscreator.v4.test");
 		ComponentCreator.setImportsAs(new ArrayList<String>());
 		ComponentCreator.addImport(ComponentCreator.setNewImport("java.util.ArrayList"));
-		ComponentCreator.createMainComponent(new String[]{"public", "abstract"}, "class");
-		ComponentCreator.addWhatExtendsImplements("GoatBase", new String[]{"IGoatable"});
+		ComponentCreator.createMainComponent(new String[]{"public"}, "class");
+		//ComponentCreator.addWhatExtendsImplements("GoatBase", new String[]{"IGoatable"});
 		ComponentCreator.setFileBodyAs(new ArrayList<String>());
 		ComponentCreator.declareNewVariableWithoutInitialization(new String[]{"public"}, "int", "x");
 		ComponentCreator.addToFileBody(ComponentCreator.addConstructor("public", 
@@ -29,7 +34,7 @@ public class MainClassFCC_v4
 		ComponentCreator.addToFileBody(ComponentCreator.addMethod(new String[]{"public"}, "int", "addXToX", 
 				new String[]{"int x", "int x2"}, new String[]{"return x + x2;"}));
 		ComponentCreator.addToFileBody(ComponentCreator.addMethod(new String[]{"public"}, "int", "getX", 
-				new String[]{}, new String[]{"return x;"}));
+				new String[]{}, new String[]{"return 10;"}));
 		{
 			ComponentCreator.setAddtionalComponentsAs(new ArrayList<IComponent>());
 			{
@@ -41,7 +46,7 @@ public class MainClassFCC_v4
 								new String[]{"int x"}, new String[]{"jakisX = x;"}));
 				comp.addToComponentBody(ComponentCreator.
 						addMethod(new String[]{"public"}, "int", "getX", new String[]{}, 
-								new String[]{"return jakiX;"}));
+								new String[]{"return jakisX;"}));
 				ComponentCreator.addAdditionalComponent(comp);
 			}
 		}
