@@ -11,7 +11,6 @@ import seia.fastclasscreator.v4.api.IFileHandler;
 import seia.fastclasscreator.v4.file.CreatedFile;
 
 /**
- * Dorobiæ FileHandler i zapamietac utworzone pliki.
  * @author Krzysztof "SeiA" Dobrzyñski
  */
 public class ComponentCreator implements IComponentCreator
@@ -261,15 +260,13 @@ public class ComponentCreator implements IComponentCreator
 		_mainComponentType = "";
 		_whatExtends = "";
 	}
-	
-	
+
 	/*
 	 * ======================================================================================
 	 *                                  Additional  Methods
 	 * ======================================================================================
 	 */
-	
-	
+
 	public static String setCondition(String condition)
 	{
 		return "( " + condition + " )";
